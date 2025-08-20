@@ -1,0 +1,38 @@
+---
+strategy: polling
+no_screen_padding: 'no'
+dark_mode: 'no'
+static_data: ''
+polling_verb: get
+polling_url: https://data.api.xweather.com/observations/{{station_name}}?format=json&client_id={{client_id}}&client_secret={{client_secret}}
+polling_headers: ''
+polling_body: ''
+id: 138269
+custom_fields:
+- keyname: author_bio
+  field_type: author_bio
+  name: Author
+  description: Justin Fleming, another software engineer
+- keyname: location_name
+  field_type: string
+  name: Station Name
+  description: This is a place where you can put the displayed location, or name of your weather station
+  help_text: What you write here will appear on the top left of the display
+  optional: true
+- keyname: station_name
+  field_type: string
+  name: Weather Station Name
+  description: Lookup name of your weather station on XWeather (ex. PWS_{station_name})
+  help_text: This is the name of your weatherstation as seen from XWeather, so if you have a PWS at PWSWeather.com, prefix it with "PWS_".  To get a client_id and client_secret create an application within XWeather.  Make sure your weather station's website is linked to your xweather account to get free API access required to run this plugin.
+- keyname: client_id
+  field_type: string
+  name: XWeather Client Id
+  description: You need to enter your client_id from XWeather here.
+  help_text: Get a client_id by creating an application within XWeather.
+- keyname: client_secret
+  field_type: string
+  name: XWeather Client Secret
+  description: You need to enter your client_secret from XWeather here.
+  help_text: Get a client_secret by creating an application within XWeather.
+name: XWeather Beta
+refresh_interval: 15
