@@ -1,13 +1,13 @@
 <style>
   .weather-icon {
-    width: 8rem;
-    height: 8rem;
+    width: 7rem;
+    height: 7rem;
     object-fit: contain;
   }
   
   .main-icon {
-    width: 8rem;
-    height: 8rem;
+    width: 7rem;
+    height: 7rem;
   }
   
   .weather-icon-container {
@@ -594,7 +594,8 @@ s-0.13,0.06-0.24,0l-3.47-1.3c-0.1-0.04-0.2-0.04-0.29,0l-3.5,1.3c-0.1,0.06-0.17,0
 
 
   {% comment %} Build the icon URL {% endcomment %}
-  {% assign icon_url = 'https://usetrmnl.com/images/plugins/weather/' | append: weather_icon | append: '.svg' %}
+  {%- assign icon_url = 'https://usetrmnl.com/images/plugins/weather/' | append: weather_icon | append: '.svg' -%}
+  {%- assign system = trmnl.plugin_settings.custom_fields_values.System | default: "imperial" -%}
 
 <div class="layout">
   <div class="weather-display">
@@ -611,8 +612,13 @@ s-0.13,0.06-0.24,0l-3.47-1.3c-0.1-0.04-0.2-0.04-0.29,0l-3.5,1.3c-0.1,0.06-0.17,0
           <img src="{{ icon_url }}" alt="{{ response.ob.weather }}" class="weather-icon">
         </div>
         <div class="main-temp">
-          {{- response.ob.tempF | round -}}&deg;
-          <span class="feels-like-temp">Feels like {{ response.ob.feelslikeF | round }}&deg;</span>
+          {%- if system == "metric" -%}
+            {{- response.ob.tempC | round -}}&deg;
+            <span class="feels-like-temp">Feels like {{ response.ob.feelslikeC | round }}&deg;</span>
+          {%- else -%}
+            {{- response.ob.tempF | round -}}&deg;
+            <span class="feels-like-temp">Feels like {{ response.ob.feelslikeF | round }}&deg;</span>
+          {%- endif -%}
         </div>
       </div>
     </div>
@@ -627,7 +633,11 @@ s-0.13,0.06-0.24,0l-3.47-1.3c-0.1-0.04-0.2-0.04-0.29,0l-3.5,1.3c-0.1,0.06-0.17,0
         <div class="stat-content">
           <div class="stat-title">Humidity</div>
           <div class="stat-number">{{- response.ob.humidity -}}<span class="stat-unit">%</span></div>
-          <div class="stat-sub">Dewpoint: {{ response.ob.dewpointF | round }}&deg;F</div>
+          {%- if system == "metric" -%}
+            <div class="stat-sub">Dewpoint: {{ response.ob.dewpointC | round }}&deg;C</div>
+          {%- else -%}
+            <div class="stat-sub">Dewpoint: {{ response.ob.dewpointF | round }}&deg;F</div>
+          {%- endif -%}
         </div>
       </div>
 
@@ -638,9 +648,16 @@ s-0.13,0.06-0.24,0l-3.47-1.3c-0.1-0.04-0.2-0.04-0.29,0l-3.5,1.3c-0.1,0.06-0.17,0
         </div>
         <div class="stat-content">
           <div class="stat-title">Wind ({{- response.ob.windDir -}})</div>
-          <div class="stat-number">{{- response.ob.windSpeedMPH | round -}}<span class="stat-unit">mph</span></div>
-          {%- if response.ob.windGustMPH -%}
-            <div class="stat-sub">Gusts to {{ response.ob.windGustMPH | round }} mph</div>
+          {%- if system == "metric" -%}
+            <div class="stat-number">{{- response.ob.windSpeedKPH | round -}}<span class="stat-unit">kph</span></div>
+            {%- if response.ob.windGustKPH -%}
+              <div class="stat-sub">Gusts to {{ response.ob.windGustKPH | round }} kph</div>
+            {%- endif -%}
+          {%- else -%}
+            <div class="stat-number">{{- response.ob.windSpeedMPH | round -}}<span class="stat-unit">mph</span></div>
+            {%- if response.ob.windGustMPH -%}
+              <div class="stat-sub">Gusts to {{ response.ob.windGustMPH | round }} mph</div>
+            {%- endif -%}
           {%- endif -%}
         </div>
       </div>
@@ -652,7 +669,11 @@ s-0.13,0.06-0.24,0l-3.47-1.3c-0.1-0.04-0.2-0.04-0.29,0l-3.5,1.3c-0.1,0.06-0.17,0
         </div>
         <div class="stat-content">
           <div class="stat-title">Pressure</div>
-          <div class="stat-number">{{- response.ob.pressureIN | round: 2 -}}<span class="stat-unit">in</span></div>
+          {%- if system == "metric" -%}
+            <div class="stat-number">{{- response.ob.pressureMB | round -}}<span class="stat-unit">mb</span></div>
+          {%- else -%}
+            <div class="stat-number">{{- response.ob.pressureIN | round: 2 -}}<span class="stat-unit">in</span></div>
+          {%- endif -%}
         </div>
       </div>
 
@@ -663,7 +684,11 @@ s-0.13,0.06-0.24,0l-3.47-1.3c-0.1-0.04-0.2-0.04-0.29,0l-3.5,1.3c-0.1,0.06-0.17,0
         </div>
         <div class="stat-content">
           <div class="stat-title">Precipitation</div>
-          <div class="stat-number">{{- response.ob.precipDayIN | default: 0.0 | round: 2 -}}<span class="stat-unit">in</span></div>
+          {%- if system == "metric" -%}
+            <div class="stat-number">{{- response.ob.precipMM | default: 0.0 | round: 1 -}}<span class="stat-unit">mm</span></div>
+            {%- else -%}
+            <div class="stat-number">{{- response.ob.precipIN | default: 0.0 | round: 2 -}}<span class="stat-unit">in</span></div>
+          {%- endif -%}
         </div>
       </div>
 
