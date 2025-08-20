@@ -625,21 +625,6 @@ s-0.13,0.06-0.24,0l-3.47-1.3c-0.1-0.04-0.2-0.04-0.29,0l-3.5,1.3c-0.1,0.06-0.17,0
 
     <!-- Weather Statistics Grid -->
     <div class="stats-container">
-      <!-- Humidity with Dewpoint -->
-      <div class="stat-item">
-        <div class="stat-icon {{ icon_class }}">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30" fill="currentColor"><path d="{{ icon_humidity }}" /></svg>
-        </div>
-        <div class="stat-content">
-          <div class="stat-title">Humidity</div>
-          <div class="stat-number">{{- response.ob.humidity -}}<span class="stat-unit">%</span></div>
-          {%- if system == "metric" -%}
-            <div class="stat-sub">Dewpoint: {{ response.ob.dewpointC | round }}&deg;C</div>
-          {%- else -%}
-            <div class="stat-sub">Dewpoint: {{ response.ob.dewpointF | round }}&deg;F</div>
-          {%- endif -%}
-        </div>
-      </div>
 
       <!-- Wind Speed and Direction -->
       <div class="stat-item">
@@ -662,6 +647,22 @@ s-0.13,0.06-0.24,0l-3.47-1.3c-0.1-0.04-0.2-0.04-0.29,0l-3.5,1.3c-0.1,0.06-0.17,0
         </div>
       </div>
 
+      <!-- Humidity with Dewpoint -->
+      <div class="stat-item">
+        <div class="stat-icon {{ icon_class }}">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30" fill="currentColor"><path d="{{ icon_humidity }}" /></svg>
+        </div>
+        <div class="stat-content">
+          <div class="stat-title">Humidity</div>
+          <div class="stat-number">{{- response.ob.humidity -}}<span class="stat-unit">%</span></div>
+          {%- if system == "metric" -%}
+            <div class="stat-sub">Dewpoint: {{ response.ob.dewpointC | round }}&deg;C</div>
+          {%- else -%}
+            <div class="stat-sub">Dewpoint: {{ response.ob.dewpointF | round }}&deg;F</div>
+          {%- endif -%}
+        </div>
+      </div>
+
       <!-- Barometric Pressure -->
       <div class="stat-item">
         <div class="stat-icon {{ icon_class }}">
@@ -670,9 +671,9 @@ s-0.13,0.06-0.24,0l-3.47-1.3c-0.1-0.04-0.2-0.04-0.29,0l-3.5,1.3c-0.1,0.06-0.17,0
         <div class="stat-content">
           <div class="stat-title">Pressure</div>
           {%- if system == "metric" -%}
-            <div class="stat-number">{{- response.ob.pressureMB | round -}}<span class="stat-unit">mb</span></div>
+            <div class="stat-number">{{- response.ob.pressureMB | round -}}<span class="stat-unit">hPa</span></div>
           {%- else -%}
-            <div class="stat-number">{{- response.ob.pressureIN | round: 2 -}}<span class="stat-unit">in</span></div>
+            <div class="stat-number">{{- response.ob.pressureIN | round: 2 -}}<span class="stat-unit">inHg</span></div>
           {%- endif -%}
         </div>
       </div>

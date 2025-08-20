@@ -766,9 +766,9 @@ endif %}
         <div class="stat-content">
           <div class="stat-title">Pressure</div>
           {%- if system == "metric" -%}
-            <div class="stat-number">{{- response.ob.pressureMB | round -}}<span class="stat-unit">mb</span></div>
+            <div class="stat-number">{{- response.ob.pressureMB | round -}}<span class="stat-unit">hPa</span></div>
           {%- else -%}
-            <div class="stat-number">{{- response.ob.pressureIN | round: 2 -}}<span class="stat-unit">in</span></div>
+            <div class="stat-number">{{- response.ob.pressureIN | round: 2 -}}<span class="stat-unit">inHg</span></div>
           {%- endif -%}
         </div>
       </div>

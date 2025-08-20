@@ -603,8 +603,8 @@ s-0.13,0.06-0.24,0l-3.47-1.3c-0.1-0.04-0.2-0.04-0.29,0l-3.5,1.3c-0.1,0.06-0.17,0
     <!-- Header with Location and Main Temperature -->
     <div class="header-section">
       <div class="location-block">
-        <!-- <h1 class="location-title">{{ location_name | default: "My Weather Station" }}</h1> -->
-        <h1 class="location-title">{{ trmnl.plugin_settings.custom_fields_values.location_name | default: "My Weather Station"}}</h1>
+        <div class="stat-number">{{ trmnl.plugin_settings.custom_fields_values.location_name | default: "My Weather Station"}}</div>
+        <p class="update-time">Updated: </p>
         <p class="update-time">{{- response.ob.dateTimeISO | date: "%b %d, %Y, %I:%M %p" -}}</p>
       </div>
 
