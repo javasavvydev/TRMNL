@@ -1,13 +1,13 @@
 <style>
   .weather-icon {
-    width: 10rem;
-    height: 10rem;
+    width: 9rem;
+    height: 9rem;
     object-fit: contain;
   }
 
   .main-icon {
-    width: 10rem;
-    height: 10rem;
+    width: 9rem;
+    height: 8rem;
   }
 
   /* Responsive sizing based on container */
@@ -91,6 +91,7 @@
     gap: 0.75rem;
     background: transparent;
     padding-left: .5rem;
+    overflow:visible;
   }
 
   .stat-icon {
@@ -102,30 +103,32 @@
   .stat-content {
     display: flex;
     flex-direction: column;
-    overflow: hidden;
+    overflow:visible;
+    /* overflow: hidden; */
   }
 
   .stat-title {
-    font-size: 1.25rem;
+    font-size: 1.2rem;
     font-weight: bold;
     white-space: nowrap;
-    line-height: 1;
+    line-height: normal;
+    /* overflow:visible; */
   }
 
   .stat-number {
     font-size: 1.75rem;
     font-weight: bold;
-    line-height: 1.1;
+    line-height: normal;
   }
 
   .stat-time {
-    font-size: 1.25rem;
+    font-size: 1.2rem;
     font-weight: bold;
-    line-height: 1.1;
+    line-height: normal;
   }
 
   .stat-unit {
-    font-size: 1.25rem;
+    font-size: 1.2rem;
     font-weight: bold;
     margin-left: 0.25rem;
   }
@@ -134,7 +137,7 @@
     font-size: 1.1rem;
     font-weight: bold;
     margin-top: 0;
-    line-height: 1;
+    /* line-height: 1; */
   }
 
 </style>
@@ -276,10 +279,8 @@
           </svg>
         </div>
         <div class="stat-content">
-          <span class="stat-title text--gray-30">Rise: <span class="stat-time"> {{ response.ob.sunriseISO | date: "%I:%M %p"
-              }}</span></span>
-          <span class="stat-title text--gray-30">Set: <span class="stat-time"> {{ response.ob.sunsetISO | date: "%I:%M %p"
-              }}</span></span>
+          <span class="stat-title text--gray-30">Rise: <span class="stat-time"> {{ response.ob.sunrise | date: "%s" | plus: trmnl.user.utc_offset | date: "%I:%M %p" }}</span></span>
+          <span class="stat-title text--gray-30">Set: <span class="stat-time"> {{ response.ob.sunset | date: "%s" | plus: trmnl.user.utc_offset | date: "%I:%M %p" }} </span></span>
         </div>
       </div>
 

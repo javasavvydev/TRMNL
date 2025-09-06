@@ -37,7 +37,6 @@
   .location-block .location-title {
     font-size: 1.5rem;
     font-weight: bold;
-    /* color: #111827; */
     margin-left: 1rem;
     line-height: 1; 
   }
@@ -45,7 +44,6 @@
   .location-block .update-time {
     font-size: 1rem;
     font-weight: bold;
-    /* color: #6b7280; */
     margin-left: 1rem;
   }
 
@@ -60,7 +58,6 @@
   .main-temp {
     font-size: 4rem;
     font-weight: bold;
-    /* color: #111827; */
     line-height: 1;
     text-align: right;
   }
@@ -68,7 +65,6 @@
   .feels-like-temp {
     font-size: 1rem;
     font-weight: bold;
-    /* color: #6b7280; */
     display: block;
   }
 
@@ -103,7 +99,6 @@
   .stat-title {
     font-size: 1.25rem;
     font-weight: bold;
-    /* color: #6b7280; */
     white-space: nowrap;
     line-height: 1;
   }
@@ -111,28 +106,24 @@
   .stat-number {
     font-size: 1.25rem;
     font-weight: bold;
-    /* color: #111827; */
     line-height: 1.1; /* Tighter line height */
   }
 
   .stat-time {
     font-size: 1rem;
     font-weight: bold;
-    /* color: #111827; */
     line-height: 1.1; 
   }
 
   .stat-unit {
     font-size: .75rem;
     font-weight: bold;
-    /* color: #6b7280; */
     margin-left: 0.25rem;
   }
 
   .stat-sub {
     font-size: .7rem;
     font-weight: bold;
-    /* color: #6b7280; */
     margin-top: 0; /* Reduced margin */
     line-height: 1;
   }
@@ -253,8 +244,8 @@
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30" fill="currentColor"><path d="{{ icon_horizon_alt }}" /></svg>
         </div>
         <div class="stat-content">
-          <span class="stat-title text--gray-30">Rise: <span class="stat-time"> {{ response.ob.sunriseISO | date: "%I:%M %p" }}</span></span>
-          <span class="stat-title text--gray-30">Set: <span class="stat-time"> {{ response.ob.sunsetISO | date: "%I:%M %p" }}</span></span>
+          <span class="stat-title text--gray-30">Rise: <span class="stat-time"> {{ response.ob.sunrise | date: "%s" | plus: trmnl.user.utc_offset | date: "%I:%M %p" }}</span></span>
+          <span class="stat-title text--gray-30">Set: <span class="stat-time"> {{ response.ob.sunset | date: "%s" | plus: trmnl.user.utc_offset | date: "%I:%M %p" }}</span></span>
         </div>
       </div>
 

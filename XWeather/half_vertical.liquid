@@ -257,10 +257,8 @@
           </svg>
         </div>
         <div class="stat-content">
-          <span class="stat-title text--gray-30">Rise: <span class="stat-time"> {{ response.ob.sunriseISO | date: "%I:%M
-            %p"}}</span></span>
-          <span class="stat-title text--gray-30">Set: <span class="stat-time"> {{ response.ob.sunsetISO | date: "%I:%M %p"
-            }}</span></span>
+          <span class="stat-title text--gray-30">Rise: <span class="stat-time"> {{ response.ob.sunrise | date: "%s" | plus: trmnl.user.utc_offset | date: "%I:%M %p" }}</span></span>
+          <span class="stat-title text--gray-30">Set: <span class="stat-time"> {{ response.ob.sunset | date: "%s" | plus: trmnl.user.utc_offset | date: "%I:%M %p" }}</span></span>
         </div>
       </div>
 
