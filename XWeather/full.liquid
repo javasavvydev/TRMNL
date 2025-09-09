@@ -1,143 +1,98 @@
 <style>
+  /* Full Layout Specific Styles */
   .weather-icon {
     width: 9rem;
     height: 9rem;
-    object-fit: contain;
   }
 
   .main-icon {
     width: 9rem;
-    height: 8rem;
+    height: 9rem;
   }
 
-  /* Responsive sizing based on container */
-  .weather-icon-container {
-    width: 100%;
-    max-width: 200px;
-  }
-
-  .weather-icon-container .weather-icon {
-    width: 100%;
-    aspect-ratio: 1;
-  }
-
-  /* Main Layout Container */
   .weather-display {
     width: 100%;
     max-width: 750px;
-    display: flex;
     flex-direction: column;
-    gap: 1rem;
-    font-family: system-ui, -apple-system, sans-serif;
   }
 
-  /* Header Section */
   .header-section {
-    display: flex;
     justify-content: space-between;
-    align-items: center;
     padding-bottom: 0.5rem;
-    gap: 1rem;
+    align-items: center;
   }
 
+      /* Temperature Display */
+  .temp-section {
+    align-items: center;
+    display: flex;
+  }
+  
   .location-block .location-title {
     font-size: 2.5rem;
-    font-weight: bold;
-    margin-left: 1rem;
     line-height: 1.1;
   }
 
   .location-block .update-time {
     font-size: 1.25rem;
-    font-weight: bold;
-    margin-left: 1rem;
   }
 
-  /* Temperature Display */
   .temp-section {
-    display: flex;
-    align-items: center;
     gap: 1rem;
   }
 
-
   .main-temp {
     font-size: 5rem;
-    font-weight: bold;
-    line-height: 1;
-    text-align: right;
   }
 
   .feels-like-temp {
     font-size: 1.25rem;
-    font-weight: bold;
-    display: block;
     margin-top: 0;
   }
 
-  /* Weather Stats Grid */
   .stats-container {
-    display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 1.25rem 2.5rem;
     margin-bottom: 2rem;
   }
 
-  /* Individual Stat Item */
   .stat-item {
-    display: flex;
-    align-items: center;
     align-content: center;
     gap: 0.75rem;
-    background: transparent;
     padding-left: .5rem;
-    overflow:visible;
+    overflow: visible;
   }
 
   .stat-icon {
     width: 3rem;
     height: 3rem;
-    flex-shrink: 0;
   }
 
   .stat-content {
-    display: flex;
-    flex-direction: column;
-    overflow:visible;
-    /* overflow: hidden; */
+    overflow: visible;
   }
 
   .stat-title {
     font-size: 1.2rem;
-    font-weight: bold;
-    white-space: nowrap;
     line-height: normal;
-    /* overflow:visible; */
   }
 
   .stat-number {
     font-size: 1.75rem;
-    font-weight: bold;
     line-height: normal;
   }
 
   .stat-time {
     font-size: 1.2rem;
-    font-weight: bold;
     line-height: normal;
   }
 
   .stat-unit {
     font-size: 1.2rem;
-    font-weight: bold;
-    margin-left: 0.25rem;
   }
 
   .stat-sub {
     font-size: 1.1rem;
-    font-weight: bold;
-    margin-top: 0;
-    /* line-height: 1; */
   }
 
 </style>
@@ -153,7 +108,7 @@
       </div>
 
       <div class="temp-section">
-        <div class="main-icon {{ icon_class }}">
+        <div class="main-icon">
           <img src="{{ icon_url }}" alt="{{ response.ob.weather }}" class="weather-icon">
         </div>
         <div class="main-temp">
@@ -172,7 +127,7 @@
     <div class="stats-container">
       <!-- Humidity with Dewpoint -->
       <div class="stat-item">
-        <div class="stat-icon {{ icon_class }}">
+        <div class="stat-icon">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30" fill="currentColor">
             <path d="{{ icon_humidity }}" />
           </svg>
@@ -190,7 +145,7 @@
 
       <!-- Wind Speed and Direction -->
       <div class="stat-item">
-        <div class="stat-icon {{ icon_class }}" style="{{ wind_rotation }}">
+        <div class="stat-icon" style="{{ wind_rotation }}">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30" fill="currentColor">
             <path d="{{ icon_wind_deg }}" />
           </svg>
@@ -213,7 +168,7 @@
 
       <!-- Barometric Pressure -->
       <div class="stat-item">
-        <div class="stat-icon {{ icon_class }}">
+        <div class="stat-icon">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30" fill="currentColor">
             <path d="{{ icon_barometer }}" />
           </svg>
@@ -230,7 +185,7 @@
 
       <!-- Daily Precipitation -->
       <div class="stat-item">
-        <div class="stat-icon {{ icon_class }}">
+        <div class="stat-icon">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30" fill="currentColor">
             <path d="{{ icon_showers }}" />
           </svg>
@@ -247,7 +202,7 @@
 
       <!-- UV Index -->
       <div class="stat-item">
-        <div class="stat-icon {{ icon_class }}">
+        <div class="stat-icon">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30" fill="currentColor">
             <path d="{{ icon_hot }}" />
           </svg>
@@ -260,7 +215,7 @@
 
       <!-- Solar Radiation -->
       <div class="stat-item">
-        <div class="stat-icon {{ icon_class }}">
+        <div class="stat-icon">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30" fill="currentColor">
             <path d="{{ icon_thermometer }}" />
           </svg>
@@ -273,7 +228,7 @@
 
       <!-- Sunrise/Sunset Times -->
       <div class="stat-item">
-        <div class="stat-icon {{ icon_class }}">
+        <div class="stat-icon">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30" fill="currentColor">
             <path d="{{ icon_horizon_alt }}" />
           </svg>
@@ -286,7 +241,7 @@
 
       <!-- Lightning Activity -->
       <div class="stat-item">
-        <div class="stat-icon {{ icon_class }}">
+        <div class="stat-icon">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30" fill="currentColor">
             <path d="{{ icon_lightning }}" />
           </svg>

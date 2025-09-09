@@ -1,115 +1,90 @@
 <style>
 
-  .weather-icon {
-    width: 6rem;
-    height: 6rem;
-  }
-  
   .main-icon {
-    width: 6rem;
-    height: 6rem;
+    width: 5rem;
+    height: 4rem;
   }
 
-  /* Responsive sizing based on container */
-  .weather-icon-container {
-    max-width: 200px;
-  }
-
-  /* Main Layout Container */
   .weather-display {
     width: 100%;
-    max-width: 350px;
+    height: 100%;
     flex-direction: column;
-    font-family: system-ui, -apple-system, sans-serif;
   }
 
-  /* Header Section */
   .header-section {
-    display: flex;
+    align-items:top;
+    flex-direction:row;
+  }
+
+  .location-section {
+    display:flex;
+    flex-direction:column;
     align-items: center;
   }
 
+  .icon-section {
+    display:flex;
+    align-items: top;
+    flex-direction:column;
+  }
+
+  .temp-section {
+    display:flex;
+    align-items: center;
+    flex-direction:column;
+  }
+  
   .location-block .location-title {
+    align-items: top;
     font-size: 1.5rem;
-    font-weight: bold;
   }
 
   .location-block .update-time {
     font-size: .75rem;
-    font-weight: bold;
-  }
-
-  /* Temperature Display */
-  .temp-section {
-    display: flex;
-    align-items: center;
   }
 
   .main-temp {
-    font-size: 3rem;
-    font-weight: bold;
-    line-height: 1;
-    text-align: right;
+    font-size: 3.5rem;
   }
 
   .feels-like-temp {
     font-size: .75rem;
-    font-weight: bold;
-    display: block;
-    margin-top: 0; /* Reduced margin */
+    margin-top: 0;
   }
 
-  /* Weather Stats Grid */
   .stats-container {
-    display: grid;
     grid-template-columns: repeat(2, 1fr);
+    /* align-items: bottom; */
   }
 
-  /* Individual Stat Item */
   .stat-item {
-    display: flex;
-    align-items: center;
-    background: transparent;
     padding: 0;
-    margin-top: .5rem;
-    padding-right:2rem;
+    margin-top: 1rem;
+    padding-right: 2rem;
   }
 
   .stat-icon {
     width: 2rem;
     height: 2rem;
-    flex-shrink: 0;
-  }
-
-  .stat-content {
-    display: flex;
-    flex-direction: column;
   }
 
   .stat-title {
     font-size: 1rem;
-    font-weight: bold;
-    white-space: nowrap;
     line-height: 1;
   }
 
   .stat-number {
     font-size: 1.25rem;
-    font-weight: bold;
-    line-height: 1.1; /* Tighter line height */
+    line-height: 1.1;
   }
 
   .stat-unit {
     font-size: .75rem;
-    font-weight: bold;
-    margin-left: 0.25rem;
   }
 
   .stat-sub {
     font-size: .7rem;
-    font-weight: bold;
-    margin-top: 0; /* Reduced margin */
-    line-height: 1;
+    margin-top: 0;
   }
 
 </style>
@@ -119,16 +94,22 @@
   <div class="weather-display">
     <!-- Header with Location and Main Temperature -->
     <div class="header-section">
-      <div class="location-block">
-        <div class="stat-number">{{ trmnl.plugin_settings.custom_fields_values.location_name | default: "My Weather Station"}}</div>
-        <p class="update-time text--gray-30">Updated: </p>
-        <p class="update-time text--gray-30">{{- response.ob.timestamp | date: "%s" | plus: trmnl.user.utc_offset | date: "%b %d, %Y, %I:%M %p" -}}</p>
+      
+      <div class="location-section">
+        <div class="location-block">
+          <div class="stat-number">{{ trmnl.plugin_settings.custom_fields_values.location_name | default: "My Weather Station"}}</div>
+          <p class="update-time text--gray-30">Updated: </p>
+          <p class="update-time text--gray-30">{{- response.ob.timestamp | date: "%s" | plus: trmnl.user.utc_offset | date: "%b %d, %Y, %I:%M %p" -}}</p>
+        </div>
       </div>
 
-      <div class="temp-section">
-        <div class="main-icon {{ icon_class }}">
-          <img src="{{ icon_url }}" alt="{{ response.ob.weather }}" class="weather-icon">
+      <div class="icon-section">
+        <div class="main-icon">
+          <img src="{{ icon_url }}" alt="{{ response.ob.weather }}">
         </div>
+      </div>
+      
+      <div class="temp-section">
         <div class="main-temp">
           {%- if system == "metric" -%}
             {{- response.ob.tempC | round -}}&deg;
@@ -139,13 +120,14 @@
           {%- endif -%}
         </div>
       </div>
+      
     </div>
 
-    <!-- Weather Statistics Grid -->
+    <!-- Weather Statistics Grid --> 
     <div class="stats-container">
       <!-- Humidity with Dewpoint -->
       <div class="stat-item">
-        <div class="stat-icon {{ icon_class }}">
+        <div class="stat-icon">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30" fill="currentColor"><path d="{{ icon_humidity }}" /></svg>
         </div>
         <div class="stat-content">
@@ -161,7 +143,7 @@
 
       <!-- Wind Speed and Direction -->
       <div class="stat-item">
-        <div class="stat-icon {{ icon_class }}" style="{{ wind_rotation }}">
+        <div class="stat-icon" style="{{ wind_rotation }}">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30" fill="currentColor"><path d="{{ icon_wind_deg }}" /></svg>
         </div>
         <div class="stat-content">
@@ -182,7 +164,7 @@
 
       <!-- Daily Precipitation -->
       <div class="stat-item">
-        <div class="stat-icon {{ icon_class }}">
+        <div class="stat-icon">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30" fill="currentColor"><path d="{{ icon_showers }}" /></svg>
         </div>
         <div class="stat-content">
@@ -197,7 +179,7 @@
 
       <!-- UV Index -->
       <div class="stat-item">
-        <div class="stat-icon {{ icon_class }}">
+        <div class="stat-icon">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30" fill="currentColor"><path d="{{ icon_hot }}" /></svg>
         </div>
         <div class="stat-content">
@@ -206,6 +188,7 @@
         </div>
       </div>
     </div>
+  
   </div>
 </div>
 {%- endif -%}

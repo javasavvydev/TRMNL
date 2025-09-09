@@ -1,4 +1,76 @@
 <style>
+  /* Main Layout Container */
+  .weather-display {
+    display: flex;
+    font-family: system-ui, -apple-system, sans-serif;
+  }
+
+  /* Header Section */
+  .header-section {
+    justify-content: space-between;
+    display: flex;
+  }
+
+  .location-block .location-title {
+    font-weight: bold;
+  }
+
+  .location-block .update-time {
+    font-weight: bold;
+  }
+
+  .main-temp {
+    font-weight: bold;
+    line-height: 1;
+    text-align: right;
+  }
+
+  .feels-like-temp {
+    font-weight: bold;
+    display: block;
+  }
+
+  /* Weather Stats Grid */
+  .stats-container {
+    display: grid;
+  }
+
+  /* Individual Stat Item */
+  .stat-item {
+    display: flex;
+    align-items: center;
+    background: transparent;
+  }
+
+  .stat-icon {
+    flex-shrink: 0;
+  }
+
+  .stat-content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .stat-title {
+    font-weight: bold;
+    white-space: nowrap;
+  }
+
+  .stat-number {
+    font-weight: bold;
+  }
+
+  .stat-unit {
+    font-weight: bold;
+    margin-left: 0.25rem;
+  }
+
+  .stat-sub {
+    font-weight: bold;
+    margin-top: 0;
+    line-height: 1; /* can we remove this? */
+  }
+  
     /* Loading State */
   .loading-state {
     text-align: center;
