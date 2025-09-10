@@ -30,7 +30,7 @@
   
   .location-block .location-title {
     align-items: top;
-    font-size: 1.5rem;
+    font-size: 1rem;
   }
 
   .location-block .update-time {
@@ -47,10 +47,11 @@
 
   .stats-container {
     grid-template-columns: repeat(2, 1fr);
+    align-items: top;
   }
 
   .stat-item {
-    margin-top: 1rem;
+    margin-top: .5rem;
     padding-right: 2rem;
   }
 
@@ -87,7 +88,7 @@
       
       <div class="location-section">
         <div class="location-block">
-          <div class="stat-number">{{ trmnl.plugin_settings.custom_fields_values.location_name | default: "My Weather Station"}}</div>
+          <div class="location-title">{{ trmnl.plugin_settings.custom_fields_values.location_name | default: "My Weather Station"}}</div>
           <p class="update-time text--gray-30">Updated: </p>
           <p class="update-time text--gray-30">{{- response.ob.timestamp | date: "%s" | plus: trmnl.user.utc_offset | date: "%b %d, %Y, %I:%M %p" -}}</p>
         </div>
