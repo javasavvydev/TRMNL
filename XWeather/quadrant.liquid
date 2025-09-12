@@ -1,8 +1,8 @@
-<style>
+<style>: 
 
   .main-icon {
-    width: 5rem;
-    height: 4rem;
+    width: 6rem;
+    /* height: 4rem; */
   }
 
   .weather-display {
@@ -42,7 +42,7 @@
   }
 
   .feels-like-temp {
-    font-size: 1rem;
+    font-size: .8rem;
   }
 
   .stats-container {
@@ -62,7 +62,6 @@
 
   .stat-title {
     font-size: 1.1rem;
-    /* line-height: 1; */
   }
 
   .stat-number {
@@ -88,8 +87,7 @@
       
       <div class="location-section">
         <div class="location-block">
-          <div class="location-title">{{ trmnl.plugin_settings.custom_fields_values.location_name | default: "My Weather Station"}}</div>
-          <p class="update-time text--gray-30">Updated: </p>
+          <h1 class="location-title">{{ trmnl.plugin_settings.custom_fields_values.location_name | default: "My Weather Station"}}</h1>
           <p class="update-time text--gray-30">{{- response.ob.timestamp | date: "%s" | plus: trmnl.user.utc_offset | date: "%b %d, %Y, %I:%M %p" -}}</p>
         </div>
       </div>
